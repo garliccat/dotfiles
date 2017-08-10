@@ -1,0 +1,60 @@
+#основные цвета
+*color0:    #032C36
+*color1:    #c2454e
+*color2:    #7cbf9e
+*color3:    #8a7a63
+*color4:    #2e3340
+*color5:    #ff5879
+*color6:    #44b5b1
+*color7:    #f2f1b9
+*color8:    #065f73
+*color9:    #ef5847
+*color10:    #a2d9b1
+*color11:    #beb090
+*color12:    #61778d
+*color13:    #ff99a1
+*color14:    #9ed9d8
+*color15:    #f6f6c9
+
+
+URxvt*saveLines: 5000
+URxvt*font: xft:Iosevka Term Light:pixelsize=12
+URxvt*faceName: xft:Iosevka Term Light:pixelsize=12
+URxvt*facesize: 10
+#URxvt.font: xft:DejaVu Sans Mono-medium-r:size=9
+#URxvt.font: -*-fixed-medium-r-*-*-14-*-*-*-*-*-*-*
+#URxvt.boldFont: -*-fixed-bold-r-*-*-14-*-*-*-*-*-*-*
+#URxvt.italicFont:-*-clean-medium-r-*-*-12-*-*-*-*-*-*-* 
+#URxvt.boldItalicFont: -*-clean-medium-r-*-*-12-*-*-*-*-*-*-*
+
+# убираем скролл и границы
+URxvt*scrollBar: false
+
+# цвет фона и текста
+URxvt*background: #000000
+URxvt*foreground: #E8DFD6
+
+#clickable urls
+URxvt.perl-ext-common:  default,matcher,url-select,tabbedex
+URxvt.matcher.button:	1
+
+#url-select without mouse
+URxvt.urlLauncher:     midori
+URxvt.underlineURLs:   true
+URxvt.keysym.M-u:      perl:url-select:select_next
+
+# цвета табов
+URxvt.tabbed.new-button: no
+URxvt.tabbed.tabbar-fg: 15
+URxvt.tabbed.tabbar-bg: 8
+URxvt.tabbed.tab-fg:    8
+URxvt.tabbed.tab-bg:    14
+
+
+
+
+
+
+
+
+
