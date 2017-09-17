@@ -1,0 +1,230 @@
+set $mod Mod4
+
+font pango:Iosevka Term 9 
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod++q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+colon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# bind workspaces variables
+set $workspace1 "1:"
+set $workspace2 "2:"
+set $workspace3 "3"
+set $workspace4 "4"
+set $workspace5 "5"
+set $workspace6 "6"
+set $workspace7 "7"
+set $workspace8 "8"
+set $workspace9 "9:"
+set $workspace10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# colors variables
+set $bg-color	         #6f443f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
+# windows borders
+#new_window pixel 4
+#new_float pixel 4
+
+# shutdown / reboot
+bindsym $Mod+Shift+Delete exec shutdown -P 0
+bindsym $Mod+Shift+BackSpace exec shutdown -r 0
+
+# screenshot
+bindsym Print exec --no-startup-id scrot -uz 
+bindsym --release $mod+Print exec --no-startup-id scrot -s
+
+# starts i3status bar
+bar {
+        status_command i3status 
+
+colors {
+	background #000000
+	statusline #adc6f3
+	separator  #757575
+
+#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+
+	}
+}
+
+# lock
+bindsym $mod+shift+x exec i3lock --color 475263
+
+# Audio controls bind
+bindsym $mod+shift+period exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym $mod+shift+comma exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym $mod+shift+m exec amixer -q set Master toggle 
+bindsym XF86AudioMute exec amixer -q set Master toggle 
+
+# Brightness control
+bindsym XF86MonBrightnessUp exec xbacklight -inc 6
+bindsym XF86MonBrightnessDown exec xbacklight -dec 6
+
+## Assign workspaces to monitors
+workspace $workspace1 output VGA-1
+workspace $workspace2 output VGA-1
+workspace $workspace3 output VGA-1
+workspace $workspace4 output VGA-1
+workspace $workspace5 output VGA-1
+workspace $workspace6 output VGA-1
+workspace $workspace7 output VGA-1
+workspace $workspace8 output VGA-1
+workspace $workspace9 output VGA-1
+workspace $workspace10 output LVDS-1
+
+
+# assign programs to workspaces
+assign [class="TelegramDesktop"] $workspace9
+assign [class="Pcmanfm"] $workspace8
+
+# launching network manager
+exec nm-applet
+
+# set keyboard layout mapping and swithcing hotkey
+exec setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
+
+# launching keyboard layout-switcher
+exec gxkb
+
+# launching (restoring) wallpapers with Nitrogen
+exec nitrogen --restore
+
+# some stuff
+exec --no-startup-id ~/Telegram/Telegram
+exec --no-startup-id pcmanfm
+
+# set touchbar two finger scroll and tap-click
+exec xinput set-prop 14 291 1
+
+# launching mpd as a program
+exec --no-startup-id mpd 
