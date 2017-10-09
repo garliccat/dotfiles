@@ -204,8 +204,8 @@ workspace $workspace10 output LVDS-1
 
 
 # assign programs to workspaces
-assign [class="TelegramDesktop"] $workspace9
-assign [class="Pcmanfm"] $workspace8
+#assign [class="TelegramDesktop"] $workspace9
+#assign [class="Pcmanfm"] $workspace8
 
 # launching network manager
 exec nm-applet
@@ -220,8 +220,8 @@ exec gxkb
 exec nitrogen --restore
 
 # some stuff
-exec --no-startup-id ~/Telegram/Telegram
-exec --no-startup-id pcmanfm
+exec --no-startup-id i3-msg 'workspace $workspace9; exec ~/Telegram/Telegram'
+exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt -e ranger'
 
 # set touchbar two finger scroll and tap-click
 exec xinput set-prop 14 291 1
