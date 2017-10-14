@@ -68,8 +68,8 @@ set $workspace3 "3"
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
-set $workspace7 "7"
-set $workspace8 "8"
+set $workspace7 "7:"
+set $workspace8 "8:"
 set $workspace9 "9:"
 set $workspace10 "10"
 
@@ -204,8 +204,17 @@ workspace $workspace10 output LVDS-1
 
 
 # assign programs to workspaces
-#assign [class="TelegramDesktop"] $workspace9
+assign [class="TelegramDesktop"] $workspace9
+assign [class="Firefox-esr"] $workspace1
+assign [class="transmission-gtk"] $workspace7
 #assign [class="Pcmanfm"] $workspace8
+
+# some stuff
+exec --no-startup-id i3-msg 'workspace $workspace3; exec urxvt -e ranger'
+exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt -e ncmpcpp'
+exec --no-startup-id i3-msg 'workspace $workspace9; exec ~/Telegram/Telegram'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec firefox-esr'
+
 
 # launching network manager
 exec nm-applet
@@ -219,12 +228,10 @@ exec gxkb
 # launching (restoring) wallpapers with Nitrogen
 exec nitrogen --restore
 
-# some stuff
-exec --no-startup-id i3-msg 'workspace $workspace9; exec ~/Telegram/Telegram'
-exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt -e ranger'
-
 # set touchbar two finger scroll and tap-click
 exec xinput set-prop 14 291 1
 
 # launching mpd as a program
-exec --no-startup-id mpd 
+exec --no-startup-id mpd
+
+# vim:filetype=i3
