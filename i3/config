@@ -155,8 +155,8 @@ bindsym $Mod+Shift+Delete exec shutdown -P 0
 bindsym $Mod+Shift+BackSpace exec shutdown -r 0
 
 # screenshot
-bindsym Print exec --no-startup-id scrot -uz ~/Pictures/%Y-%m-%d-%T-screenshot.png
-bindsym --release $mod+Print exec --no-startup-id scrot -s ~/Pictures/%Y-%m-%d-%T-screenshot.png
+bindsym Print exec --no-startup-id scrot -uz ~/Screenshots/%Y-%m-%d-%T-screenshot.png
+bindsym --release $mod+Print exec --no-startup-id scrot -s ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 
 # starts i3status bar
 bar {
@@ -179,10 +179,10 @@ colors {
 bindsym $mod+shift+x exec i3lock --color 475263
 
 # Audio controls bind
-bindsym $mod+shift+period exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym $mod+shift+comma exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym --release $mod+plus exec amixer -q -c 0 set Master 0.5dB+
+bindsym XF86AudioRaiseVolume exec amixer -q -c 0 set Master 0.5dB+
+bindsym --release $mod+minus exec amixer -q -c 0 set Master 0.5dB-
+bindsym XF86AudioLowerVolume exec amixer -q -c 0 set Master 0.5dB-
 bindsym $mod+shift+m exec amixer -q set Master toggle 
 bindsym XF86AudioMute exec amixer -q set Master toggle 
 
@@ -203,13 +203,13 @@ workspace $workspace9 output VGA-1
 workspace $workspace10 output LVDS-1
 
 
-# assign programs to workspaces
+## assign programs to workspaces
 assign [class="TelegramDesktop"] $workspace9
 assign [class="Firefox-esr"] $workspace1
-assign [class="transmission-gtk"] $workspace7
+assign [class="Transmission-gtk"] $workspace7
 #assign [class="Pcmanfm"] $workspace8
 
-# some stuff
+## some stuff
 exec --no-startup-id i3-msg 'workspace $workspace3; exec urxvt -e ranger'
 exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt -e ncmpcpp'
 exec --no-startup-id i3-msg 'workspace $workspace9; exec ~/Telegram/Telegram'
