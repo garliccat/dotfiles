@@ -2,6 +2,15 @@ set $mod Mod4
 
 font pango:Iosevka Term 9 
 
+### only in case of using by i3-gaps
+for_window [class="^.*"] border pixel 0
+
+gaps inner 10
+gaps outer 0
+smart_gaps on
+
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -101,7 +110,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+#bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -151,8 +160,12 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 #new_float pixel 4
 
 # shutdown / reboot
-bindsym $Mod+Shift+Delete exec shutdown -P 0
+bindsym $Mod+Shift+Delete exec sh ~/scripts/prompt "Do you want to shutdown?" "shutdown -P 0" 
 bindsym $Mod+Shift+BackSpace exec shutdown -r 0
+bindsym $Mod+Shift+r exec urxvt -e ranger 
+
+# surf web
+bindsym $Mod+Shift+b exec sh ~/scripts/browse
 
 # screenshot
 bindsym Print exec --no-startup-id scrot -uz ~/Screenshots/%Y-%m-%d-%T-screenshot.png
@@ -160,7 +173,7 @@ bindsym --release $mod+Print exec --no-startup-id scrot -s ~/Screenshots/%Y-%m-%
 
 # starts i3status bar
 bar {
-        status_command i3status 
+        status_command i3status
 
 colors {
 	background #000000
@@ -210,23 +223,26 @@ assign [class="Transmission-gtk"] $workspace7
 #assign [class="Pcmanfm"] $workspace8
 
 ## some stuff
+
+# launching compton
+exec --no-startup-id compton --config ~/.config/compton.conf 
+
 exec --no-startup-id i3-msg 'workspace $workspace3; exec urxvt -e ranger'
 exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt -e ncmpcpp'
 exec --no-startup-id i3-msg 'workspace $workspace9; exec ~/Telegram/Telegram'
-exec --no-startup-id i3-msg 'workspace $workspace1; exec firefox-esr'
-
+# exec --no-startup-id i3-msg 'workspace $workspace1; exec firefox-esr'
 
 # launching network manager
-exec nm-applet
+exec --no-startup-id nm-applet
 
 # set keyboard layout mapping and swithcing hotkey
 exec setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
 
-# launching keyboard layout-switcher
-exec gxkb
+# launching keyboard layout indicator
+exec --no-startup-id gxkb
 
 # launching (restoring) wallpapers with Nitrogen
-exec nitrogen --restore
+exec --no-startup-id nitrogen --restore
 
 # set touchbar two finger scroll and tap-click
 exec xinput set-prop 14 291 1
@@ -234,4 +250,7 @@ exec xinput set-prop 14 291 1
 # launching mpd as a program
 exec --no-startup-id mpd
 
-# vim:filetype=i3
+# vim:filetype=i
+
+#mounting NAS
+exec mount -t cifs //192.168.1.1/vault_2 /mnt/vault -o guest
