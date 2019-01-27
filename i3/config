@@ -3,7 +3,7 @@ set $mod Mod4
 font pango:Iosevka Term 9 
 
 ### only in case of using by i3-gaps
-for_window [class="^.*"] border pixel 0
+# for_window [class="^.*"] border pixel 0
 
 gaps inner 10
 gaps outer 0
@@ -21,7 +21,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod++q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -combi-modi window#run -show combi
 
 # change focus
 bindsym $mod+j focus left
@@ -156,8 +157,8 @@ client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-co
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
 # windows borders
-#new_window pixel 4
-#new_float pixel 4
+new_window pixel 2 
+# new_float pixel 4
 
 # shutdown / reboot
 bindsym $Mod+Shift+Delete exec sh ~/scripts/prompt "Do you want to shutdown?" "shutdown -P 0" 
@@ -191,13 +192,16 @@ colors {
 # lock
 bindsym $mod+shift+x exec i3lock --color 475263
 
-# Audio controls bind
+# Audio/volume/mpd controls bind
 bindsym --release $mod+plus exec amixer -q -c 0 set Master 0.5dB+
 bindsym XF86AudioRaiseVolume exec amixer -q -c 0 set Master 0.5dB+
 bindsym --release $mod+minus exec amixer -q -c 0 set Master 0.5dB-
 bindsym XF86AudioLowerVolume exec amixer -q -c 0 set Master 0.5dB-
-bindsym $mod+shift+m exec amixer -q set Master toggle 
-bindsym XF86AudioMute exec amixer -q set Master toggle 
+bindsym $mod+shift+m exec amixer -D pulse set Master toggle 
+bindsym XF86AudioMute exec amixer -D pulse set Master toggle 
+bindsym XF86AudioPrev exec mpc prev
+bindsym XF86AudioPlay exec mpc toggle 
+bindsym XF86AudioNext exec mpc next
 
 # Brightness control
 bindsym XF86MonBrightnessUp exec xbacklight -inc 6
@@ -227,6 +231,7 @@ assign [class="Transmission-gtk"] $workspace7
 # launching compton
 exec --no-startup-id compton --config ~/.config/compton.conf 
 
+# launching apps on it's workspaces
 exec --no-startup-id i3-msg 'workspace $workspace3; exec urxvt -e ranger'
 exec --no-startup-id i3-msg 'workspace $workspace8; exec urxvt -e ncmpcpp'
 exec --no-startup-id i3-msg 'workspace $workspace9; exec ~/Telegram/Telegram'
