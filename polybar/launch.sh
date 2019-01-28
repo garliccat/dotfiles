@@ -6,6 +6,9 @@ killall -q polybar
 # wait a sec till it dies
 while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
 
+# wait untill all monitors to initiate due to laggy pc
+sleep 3
+
 # determines the amount of monitors
 if type "xrandr"; then
   for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
