@@ -111,7 +111,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 bindsym $mod+Shift+c reload
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-#bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -163,7 +163,7 @@ new_window pixel 2
 # shutdown / reboot
 bindsym $Mod+Shift+Delete exec sh ~/scripts/prompt "Do you want to shutdown?" "shutdown -P 0" 
 bindsym $Mod+Shift+BackSpace exec shutdown -r 0
-bindsym $Mod+Shift+r exec urxvt -e ranger 
+bindsym $Mod+Shift+f exec urxvt -e ranger 
 
 # surf web
 bindsym $Mod+Shift+b exec sh ~/scripts/browse
@@ -172,22 +172,22 @@ bindsym $Mod+Shift+b exec sh ~/scripts/browse
 bindsym Print exec --no-startup-id scrot -uz ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 bindsym --release $mod+Print exec --no-startup-id scrot -s ~/Screenshots/%Y-%m-%d-%T-screenshot.png
 
-# starts i3status bar
-bar {
-        status_command i3status
-
-colors {
-	background #000000
-	statusline #adc6f3
-	separator  #757575
-
-#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-
-	}
-}
+## starts i3status bar
+#bar {
+#        status_command i3status
+#
+#colors {
+#	background #000000
+#	statusline #adc6f3
+#	separator  #757575
+#
+##                  border             background         text
+#		focused_workspace  $bg-color          $bg-color          $text-color
+#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#
+#	}
+#}
 
 # lock
 bindsym $mod+shift+x exec i3lock --color 475263
@@ -244,7 +244,7 @@ exec --no-startup-id nm-applet
 exec setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
 
 # launching keyboard layout indicator
-exec --no-startup-id gxkb
+#exec --no-startup-id gxkb
 
 # launching (restoring) wallpapers with Nitrogen
 exec --no-startup-id nitrogen --restore
@@ -253,9 +253,12 @@ exec --no-startup-id nitrogen --restore
 exec xinput set-prop 14 291 1
 
 # launching mpd as a program
-exec --no-startup-id mpd
+#exec --no-startup-id mpd
 
 # vim:filetype=i
 
 #mounting NAS
 exec mount -t cifs //192.168.1.1/vault_2 /mnt/vault -o guest
+
+# starts polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
